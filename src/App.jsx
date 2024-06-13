@@ -17,8 +17,14 @@ export const goods = [
 
 export const App = () => {
   const [chosenItem, setChosenItem] = useState('Jam');
-  const [isSelected, setIsSelectedState] = useState(true);
+  const [isSelected, setIsSelected] = useState(true);
   const [selectedRow, setSelectedRow] = useState('Jam');
+
+  const clearSelection = () => {
+    setChosenItem('');
+    setIsSelected(false);
+    setSelectedRow('');
+  };
 
   return (
     <>
@@ -28,11 +34,7 @@ export const App = () => {
             <>
               {chosenItem} is selected
               <button
-                onClick={() => {
-                  setChosenItem('');
-                  setIsSelectedState(false);
-                  setSelectedRow('');
-                }}
+                onClick={clearSelection}
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
@@ -56,11 +58,7 @@ export const App = () => {
                 <td>
                   {item === chosenItem ? (
                     <button
-                      onClick={() => {
-                        setIsSelectedState(false);
-                        setChosenItem('');
-                        setSelectedRow('');
-                      }}
+                      onClick={clearSelection}
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
@@ -71,7 +69,7 @@ export const App = () => {
                     <button
                       onClick={() => {
                         setChosenItem(item);
-                        setIsSelectedState(true);
+                        setIsSelected(true);
                         setSelectedRow(item);
                       }}
                       data-cy="AddButton"
